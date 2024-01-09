@@ -1,0 +1,88 @@
+hub/spawn-pending/{username}   302  GET 
+response_header_location  ->  user/{username}/  
+
+request_header_cookie
+- Cookie:
+	_xsrf=2|badda539|625804829b4136c5075b1951d2f0eb34|1704392053; 
+    jupyterhub-hub-login="2|1:0|10:1704392075|20:jupyterhub-hub-login|44:ODQ5MjVjNTUzZWNjNGVlZTg5MzAxZWM5OGFlNjM0Y2U=|4991fe60965bd43cc0d60a4eea32d0f63db714178114380ef7d9a8f9bd6b660b"; 
+    jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
+
+
+once spawn completed
+
+
+/user/{username}/      302    GET    
+response_header_location  ->  /user/{username}/lab?
+request_header_cookie -> jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
+
+
+/user/{username}/lab?    200/302   GET 
+if 200 then it will redirect to lab 
+else 302
+request_header_cookie -> jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
+
+response_header -> 
+location:
+	/hub/api/oauth2/authorize?client_id=jupyterhub-user-{username}
+    &redirect_uri=%2Fuser%2F{username}%2Foauth_callback&
+    response_type=code&
+    state=eyJ1dWlkIjogIjY4ZjQ0NzFmOTlhYjQ0ZTBhMzAwZjY0NmMxMWUzZGZhIiwgIm5leHRfdXJsIjogIi91c2VyL2FkbWluL2xhYj8ifQ
+
+set-cookie
+	jupyterhub-user-{username}-oauth-state=2|1:0|10:1704392095|33:jupyterhub-user-admin-oauth-state|136:ZXlKMWRXbGtJam9nSWpZNFpqUTBOekZtT1RsaFlqUTBaVEJoTXpBd1pqWTBObU14TVdVelpHWmhJaXdnSW01bGVIUmZkWEpzSWpvZ0lpOTFjMlZ5TDJGa2JXbHVMMnhoWWo4aWZR|933f48de30d9f6e3be1689d8836948886698c25ceaa41f847b7034b77b0774d3; expires=Sat, 03 Feb 2024 18:14:55 GMT; HttpOnly; Max-Age=600; Path=/user/admin/
+
+
+
+/hub/api/oauth2/authorize    302   GET
+
+request_param:
+
+client_id = jupyterhub-user-{username}
+redirect_url = /user/admin/oauth_callback
+response_type = code
+state = eyJ1dWlkIjogIjY4ZjQ0NzFmOTlhYjQ0ZTBhMzAwZjY0NmMxMWUzZGZhIiwgIm5leHRfdXJsIjogIi91c2VyL2FkbWluL2xhYj8ifQ
+
+
+request_header -> 
+
+Cookie: 
+	_xsrf=2|badda539|625804829b4136c5075b1951d2f0eb34|1704392053; 
+    jupyterhub-hub-login="2|1:0|10:1704392075|20:jupyterhub-hub-login|44:ODQ5MjVjNTUzZWNjNGVlZTg5MzAxZWM5OGFlNjM0Y2U=|4991fe60965bd43cc0d60a4eea32d0f63db714178114380ef7d9a8f9bd6b660b"; 
+    jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
+
+
+response_header ->
+
+location:
+	/user/admin/oauth_callback?
+    code=G71DbonSO9JucYzTojxRrByBjcEZXC&
+    state=eyJ1dWlkIjogIjY4ZjQ0NzFmOTlhYjQ0ZTBhMzAwZjY0NmMxMWUzZGZhIiwgIm5leHRfdXJsIjogIi91c2VyL2FkbWluL2xhYj8ifQ
+
+
+
+/user/admin/oauth_callback       302      GET
+
+request_param:
+
+code = G71DbonSO9JucYzTojxRrByBjcEZXC
+state = eyJ1dWlkIjogIjY4ZjQ0NzFmOTlhYjQ0ZTBhMzAwZjY0NmMxMWUzZGZhIiwgIm5leHRfdXJsIjogIi91c2VyL2FkbWluL2xhYj8ifQ
+
+
+request_header:
+
+Cookie:
+	jupyterhub-user-admin-oauth-state=2|1:0|10:1704392095|33:jupyterhub-user-admin-oauth-state|136:ZXlKMWRXbGtJam9nSWpZNFpqUTBOekZtT1RsaFlqUTBaVEJoTXpBd1pqWTBObU14TVdVelpHWmhJaXdnSW01bGVIUmZkWEpzSWpvZ0lpOTFjMlZ5TDJGa2JXbHVMMnhoWWo4aWZR|933f48de30d9f6e3be1689d8836948886698c25ceaa41f847b7034b77b0774d3; jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
+
+response_header : 
+location : /user/admin/lab?
+
+
+
+
+/user/admin/lab?       GET       200
+
+response_header ->   etag 
+
+request_header ->
+Cookie:
+	jupyterhub-user-admin=2|1:0|10:1704392096|21:jupyterhub-user-admin|40:ODFKZXl1d25kZUt0NHcycEhvaVJLcWNKQzNjY1hr|c69ebe0b2ad7deb94c28a0069587db747db4d42a06b0c85a0c7a2691377986b8; jupyterhub-session-id=2a0b0cdcb0ab42429269bcf53572d3c0
