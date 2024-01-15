@@ -1,0 +1,5 @@
+gitea
+
+client id = 2ee238b8-b883-4d1d-a848-17b059ef4a6c
+
+secret = gto_37iov2ocpn3hlnv35w65kvmpkrtb3a4zeqb7l7px5wudsd4w5jfa
