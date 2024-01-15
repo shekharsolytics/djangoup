@@ -7,10 +7,10 @@ from django.dispatch import receiver
 def create_jupyterhub_user(sender, instance, created, **kwargs):
 
     if created:
-        # jupyter_hub_url = "http://192.168.49.2:32611/hub/api"
-        # token = "295e178df69a47568630cca7379aa3d5"
-        jupyter_hub_url = "https://nimbus-dev-jupyterhub.solytics.us/hub/api"
-        token = "e695520948124cb99e844427d96de4b1"
+        jupyter_hub_url = "http://192.168.49.2:32611/hub/api"
+        token = "295e178df69a47568630cca7379aa3d5"
+        # jupyter_hub_url = "https://nimbus-dev-jupyterhub.solytics.us/hub/api"
+        # token = "e695520948124cb99e844427d96de4b1"
         headers = {
             'Authorization': f'token {token}'
         }
